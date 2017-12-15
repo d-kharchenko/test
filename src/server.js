@@ -14,18 +14,15 @@ app.get('/', function (req, res) {
     res.send('Hello API');
 });
 
-app.get('/artists', function (req, res) {
-    db.get().collection('artists').find().toArray(function (err, docs) {
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        res.send(docs);
-    })
+
+app.get('/products', function (req, res) {
+    db.collection('products').find({}).toArray((err, products) => {
+        res.send( products );
+    });
 });
 
-app.get('/artists/:id', function (req, res) {
-    db.collection('artists').findOne({ _id: ObjectID(req.params.id) }, function (err, doc) {
+app.get('/products/:id', function (req, res) {
+    db.collection('products').findOne({ _id: ObjectID(req.params.id) }, function (err, doc) {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -34,21 +31,21 @@ app.get('/artists/:id', function (req, res) {
     })
 });
 
-app.post('/artists', function (req, res) {
+app.post('/products', function (req, res) {
     let artist = {
         name: req.body.name
     };
-    db.get().collection('artists').insert(artist, function (err, result) {
+    db.get().collection('products').insert(artist, function (err, result) {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
         }
-        res.send(artist);
+        res.sendproducts;
     })
 });
 
-app.put('/artists/:id', function (req, res) {
-    db.collection('artists').updateOne(
+app.put('/products/:id', function (req, res) {
+    db.collection('products').updateOne(
         {_id: ObjectID(req.params.id)},
         {name: req.body.name},
         function (err, result) {
@@ -62,8 +59,8 @@ app.put('/artists/:id', function (req, res) {
 
 });
 
-app.delete('/artists/:id', function (req, res) {
-    db.get().collection('artists').deleteOne(
+app.delete('/products/:id', function (req, res) {
+    db.get().collection('products').deleteOne(
         {_id: ObjectID(req.params.id)},
         function (err, result) {
             if (err){
@@ -77,7 +74,7 @@ app.delete('/artists/:id', function (req, res) {
 
 
 
-db.connect('mongodb://localhost:27017/api', function (err) {
+db.connect('mongodb://localhost:27017/products', function (err) {
     if(err){
         return console.log(err)
     }

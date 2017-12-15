@@ -1,3 +1,7 @@
+.header-nav{
+    display: flex;
+    align-items: center;
+}
 .navbar-nav{
     display: flex;
     justify-content: space-around;

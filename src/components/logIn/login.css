@@ -1,7 +1,7 @@
 .log-in-wrap{
-    width: 500px;
+    width: 200px;
     float: right;
-    padding-top: 35px;
+    padding-top: 15px;
 }
 .log-in-form {
     display: flex;
